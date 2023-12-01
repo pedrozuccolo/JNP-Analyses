@@ -1,0 +1,58 @@
+---
+title: "RADAR-base pRMT report"
+author: "Pedro F Zuccolo"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = '/Users/pedrozuccolo/Desktop/maayAppAnalyses/')
+```
+#Packages
+```{r}
+library(haven)
+library(tidyverse)
+library(lubridate)
+
+```
+
+
+# MAAY
+
+Maio 2022: fiz acordo com a The Hyve que incluía 
+
+"Hi Pedro, I just spoke to Nivethika. I think we have a plan. We'd definitely like to support you setting up RADAR-base -- part of our goal is trying to get others to take up use of the platform, we have a small pot of person-hours available for pro bono work. I think as you are already well underway to getting setup this would be a good case for us to give you some final support to get to a starting point for your project.
+I think Nivethika has suggested getting setup on K3S on AWS?
+In return, we would ask that Hyve https://www.thehyve.nl/ and King's College Maudsley Biomedical Research Centre are acknowledged on academic output https://maudsleybrc.nihr.ac.uk/research/acknowledging-the-brc/. Also we might ask that you perhaps would be willing to write a short blog post on the work on the https://radar-base.org website?"
+
+
+
+* Periods of data collection
+* incidents
+  ** system shutdown
+
+
+```{r}
+#period of data collection
+install_dates <- read_dta("data/data_aggregated/motherly_rct_2021_t1_t2_t3_app_6_12_2022.dta")
+
+typeof(install_dates$t0_data_recrut)
+
+install_dates$t0_data_recrut <- as.Date(install_dates$t0_data_recrut)
+
+# Filter for dates after 2022-06-13 and before 2022-11-19
+app_offered_to <- install_dates %>%
+  filter(t0_data_recrut > as.Date("2022-06-13") & t0_data_recrut < as.Date("2022-08-30"))
+
+nrow(app_offered_to)
+```
+
+```{r}
+reasons_for_not_using <- read_dta("data/data_raw/motherly_rct_2021_monitoria_10_10_2023.dta")
+
+view(reasons_for_not_using)
+
+table(reasons_for_not_using$instalacao_2)
+
+```

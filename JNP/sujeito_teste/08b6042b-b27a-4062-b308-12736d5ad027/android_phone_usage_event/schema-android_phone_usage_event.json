@@ -1,0 +1,65 @@
+{
+  "type" : "record",
+  "name" : "CombineKeyValue",
+  "namespace" : "org.radarbase.kafka.connect.transforms",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "ObservationKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an observation.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", "string" ],
+        "doc" : "Project identifier. Null if unknown or the user is not enrolled in a project.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : "string",
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : "string",
+        "doc" : "Unique identifier associated with the source."
+      } ]
+    },
+    "doc" : "Key of an observation."
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "PhoneUsageEvent",
+      "namespace" : "org.radarcns.passive.phone",
+      "fields" : [ {
+        "name" : "time",
+        "type" : "double",
+        "doc" : "Device timestamp in UTC (s)."
+      }, {
+        "name" : "timeReceived",
+        "type" : "double",
+        "doc" : "Device receiver timestamp in UTC (s)."
+      }, {
+        "name" : "packageName",
+        "type" : "string",
+        "doc" : "Package name of the launched app."
+      }, {
+        "name" : "categoryName",
+        "type" : [ "null", "string" ],
+        "doc" : "App category as given by the play store, null if a category is not listed or unable to be fetched.",
+        "default" : null
+      }, {
+        "name" : "categoryNameFetchTime",
+        "type" : [ "null", "double" ],
+        "doc" : "Timestamp in UTC when the category was attempted to fetch from the play store (s), null if not fetched.",
+        "default" : null
+      }, {
+        "name" : "eventType",
+        "type" : "string",
+        "doc" : "Whether the event brought app to foreground or background or neither.",
+        "default" : "UNKNOWN"
+      } ]
+    },
+    "doc" : "Event for closing or opening an app."
+  } ]
+}

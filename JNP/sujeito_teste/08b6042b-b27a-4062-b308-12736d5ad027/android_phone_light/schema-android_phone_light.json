@@ -1,0 +1,50 @@
+{
+  "type" : "record",
+  "name" : "CombineKeyValue",
+  "namespace" : "org.radarbase.kafka.connect.transforms",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "ObservationKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an observation.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", "string" ],
+        "doc" : "Project identifier. Null if unknown or the user is not enrolled in a project.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : "string",
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : "string",
+        "doc" : "Unique identifier associated with the source."
+      } ]
+    },
+    "doc" : "Key of an observation."
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "PhoneLight",
+      "namespace" : "org.radarcns.passive.phone",
+      "fields" : [ {
+        "name" : "time",
+        "type" : "double",
+        "doc" : "Device timestamp in UTC (s)."
+      }, {
+        "name" : "timeReceived",
+        "type" : "double",
+        "doc" : "Device receiver timestamp in UTC (s)."
+      }, {
+        "name" : "light",
+        "type" : "float",
+        "doc" : "Illuminance (lx)."
+      } ]
+    },
+    "doc" : "Data from the light sensor in luminous flux per unit area."
+  } ]
+}

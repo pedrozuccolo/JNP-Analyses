@@ -1,0 +1,77 @@
+{
+  "type" : "record",
+  "name" : "CombineKeyValue",
+  "namespace" : "org.radarbase.kafka.connect.transforms",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "ObservationKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an observation.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", "string" ],
+        "doc" : "Project identifier. Null if unknown or the user is not enrolled in a project.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : "string",
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : "string",
+        "doc" : "Unique identifier associated with the source."
+      } ]
+    },
+    "doc" : "Key of an observation."
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "ApplicationDeviceInfo",
+      "namespace" : "org.radarcns.monitor.application",
+      "fields" : [ {
+        "name" : "time",
+        "type" : "double",
+        "doc" : "Device timestamp as time since the Unix Epoch (s)."
+      }, {
+        "name" : "manufacturer",
+        "type" : [ "null", "string" ],
+        "doc" : "Manufacturer of the device. Null if unknown.",
+        "default" : null
+      }, {
+        "name" : "model",
+        "type" : [ "null", "string" ],
+        "doc" : "Model of the device. Null if unknown.",
+        "default" : null
+      }, {
+        "name" : "operatingSystem",
+        "type" : "string",
+        "doc" : "Operating system that the application is running on.",
+        "default" : "UNKNOWN"
+      }, {
+        "name" : "operatingSystemVersion",
+        "type" : [ "null", "string" ],
+        "doc" : "Operating system version as readable string. Null if unknown.",
+        "default" : null
+      }, {
+        "name" : "operatingSystemVersionCode",
+        "type" : [ "null", "int" ],
+        "doc" : "Operating system unique version number. Null if unknown.",
+        "default" : null
+      }, {
+        "name" : "appVersion",
+        "type" : [ "null", "string" ],
+        "doc" : "App version as a readable string. Null if unknown.",
+        "default" : null
+      }, {
+        "name" : "appVersionCode",
+        "type" : [ "null", "int" ],
+        "doc" : "Unique app version number. Null if unknown.",
+        "default" : null
+      } ]
+    },
+    "doc" : "Device information where the application is running."
+  } ]
+}
